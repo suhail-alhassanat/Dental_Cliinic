@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">عيادة أسنان</string>
+    <string name="pharmaceutical">الأدوية</string>
+    <string name="laboratories">المختبرات</string>
+    <string name="process">العمليات</string>
+    <string name="sub_process">العمليات الفرعية</string>
+    <string name="control_interface">واجهة التحكم</string>
+    <string name="control_title">يمكنك الأن إدارة البيانات والاطلاع على التقارير المالية الخاصة بعيادتك بسهولة</string>
+    <string name="user_managment">إدارة المستخدمين</string>
+    <string name="report">التقارير المالية</string>
+    <string name="settings">الاعدادات</string>
+    <string name="create_a_new_account">انشاء حساب جديد</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="membership_number">رقم العضوية</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="email">الايميل</string>
+    <string name="password">الباسورد</string>
+    <string name="department">التخصص</string>
+    <string name="work_start_date">تاريخ بدء العمل</string>
+    <string name="work_end_date">تاريخ انتهاء العمل</string>
+    <string name="salary_per_month">الراتب الشهري</string>
+    <string name="working_time">أوقات الدوام</string>
+    <string name="working_days">أيام الدوام</string>
+    <string name="save">حفظ</string>
+    <string name="id">رقم الهوية:</string>
+    <string name="member_no">رقم العضوية:</string>
+    <string name="phone_no">رقم الهاتف:</string>
+    <string name="emailaddress">الايميل:</string>
+    <string name="depatment">التخصص:</string>
+    <string name="start_of_work">تاريخ بدء العمل:</string>
+    <string name="end_of_work">تاريخ انتهاء العمل:</string>
+    <string name="salary">الراتب الشهري :</string>
+    <string name="work_time">وقت الدوام:</string>
+    <string name="work_day">أيام الدوام:</string>
+
+</resources>
