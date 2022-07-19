@@ -1,5 +1,6 @@
 package com.suhail.dentalcliinic.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,14 @@ ActivityAdminControlBinding binding;
         super.onCreate(savedInstanceState);
         binding=ActivityAdminControlBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //initializing user management button
+        binding.btnUserManagement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminControlActivity.this,AdminUserManagementActivity.class));
+            }
+        });
 
         binding.btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
