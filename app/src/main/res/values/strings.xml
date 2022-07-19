@@ -32,4 +32,15 @@
     <string name="salary">Salary per month :</string>
     <string name="work_time">Work time:</string>
     <string name="work_day">Work days:</string>
+    <string name="specialization">Specialization</string>
+
+    <string name="general">general</string>
+    <string name="Dental_fillings_installation">Dental fillings installation</string>
+    <string name="orthodontics">orthodontics</string>
+    <string name="address">address</string>
+
+    <string name="morning">Morning 9:00-2:00 Am</string>
+    <string name="eavning">Morning 3:00-8:00 pm</string>
+
+
 </resources>

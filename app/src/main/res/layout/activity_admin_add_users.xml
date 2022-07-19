@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/_10sdp"
-    android:orientation="vertical"
     tools:context=".ui.AdminAddUsers">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
 
 
     <ImageView
@@ -56,6 +60,16 @@
         android:textSize="@dimen/_12ssp" />
 
     <EditText
+        android:id="@+id/edt_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="Identifier"
+        android:inputType="number"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
         android:id="@+id/edt_phone_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:ems="10"
-        android:hint="@string/department"
+        android:hint="@string/specialization"
         android:inputType="textPassword"
         android:textSize="@dimen/_12ssp" />
 
@@ -124,26 +138,104 @@
         android:hint="@string/salary_per_month"
         android:inputType="date"
         android:textSize="@dimen/_12ssp" />
-
     <EditText
-        android:id="@+id/edt_working_time"
+        android:id="@+id/edt_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:ems="10"
-        android:hint="@string/working_time"
+        android:hint="@string/address"
         android:inputType="text"
         android:textSize="@dimen/_12ssp" />
 
-    <EditText
-        android:id="@+id/edt_working_days"
+
+    <Spinner
+        android:id="@+id/sp_department"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"/>
+
+
+    <Spinner
+        android:id="@+id/sp_work_time"
+        android:layout_width="match_parent"
         android:layout_marginHorizontal="@dimen/_15sdp"
-        android:ems="10"
-        android:hint="@string/working_days"
-        android:inputType="text"
-        android:textSize="@dimen/_12ssp" />
+        android:layout_height="wrap_content"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:text="Gender:"
+        android:textSize="@dimen/_18ssp"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rd_mail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="mail"/>
+
+        <RadioButton
+            android:id="@+id/rd_female"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="female"/>
+    </RadioGroup>
+</LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Working Days"
+        android:textColor="@color/title_text_color"
+        android:textSize="@dimen/_22ssp"
+        android:textStyle="bold"/>
+
+    <CheckBox
+        android:id="@+id/ch_saterday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="saterday"/>
+
+    <CheckBox
+        android:id="@+id/ch_sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sunday"/>
+    <CheckBox
+        android:id="@+id/ch_monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="monday"/>
+    <CheckBox
+        android:id="@+id/ch_Tuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tuesday"/>
+    <CheckBox
+        android:id="@+id/ch_Wednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wednesday"/>
+    <CheckBox
+        android:id="@+id/ch_Thursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thursday"/>
+
+
 
     <Button
         android:id="@+id/btn_save"
@@ -151,9 +243,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/save"/>
-
-
-
-
-
 </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>
