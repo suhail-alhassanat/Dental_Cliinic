@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_10sdp"
+    android:orientation="vertical"
+    tools:context=".ui.AdminAddUsers">
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/create_a_new_account"
+        android:textColor="#1E779F"
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/img_user_photo"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:srcCompat="@drawable/blank_profile" />
+
+    <EditText
+        android:id="@+id/edt_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/user_name"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_member_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/membership_number"
+        android:inputType="number"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_phone_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/phone_number"
+        android:inputType="phone"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_department"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/department"
+        android:inputType="textPassword"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_work_start_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/work_start_date"
+        android:inputType="date"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_work_end_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/work_end_date"
+        android:inputType="date"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_salary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/salary_per_month"
+        android:inputType="date"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_working_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/working_time"
+        android:inputType="text"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/edt_working_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:ems="10"
+        android:hint="@string/working_days"
+        android:inputType="text"
+        android:textSize="@dimen/_12ssp" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/save"/>
+
+
+
+
+
+</LinearLayout>
