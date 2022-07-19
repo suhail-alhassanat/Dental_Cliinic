@@ -29,7 +29,7 @@ public class DoctorsRVAdapter extends RecyclerView.Adapter<DoctorsRVAdapter.Doct
 
     @Override
     public void onBindViewHolder(@NonNull DoctorsViewHolder holder, int position) {
-        Picasso.get().load(doctors.get(position).getImageUrl()).into(binding.imgRecDocPhotoItem);
+        Picaso.get().load(doctors.get(position).getImageUrl()).into(binding.imgRecDocPhotoItem);
         binding.txtRecDocNameItem.setText(doctors.get(position).getName());
     }
 
