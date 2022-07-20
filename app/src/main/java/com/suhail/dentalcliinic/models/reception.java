@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class reception {
+    String x;
     private String name;
     private String email;
     private String phone;
