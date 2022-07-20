@@ -89,25 +89,6 @@
         android:inputType="textEmailAddress"
         android:textSize="@dimen/_12ssp" />
 
-    <EditText
-        android:id="@+id/edt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:textSize="@dimen/_12ssp" />
-
-    <EditText
-        android:id="@+id/edt_department"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
-        android:ems="10"
-        android:hint="@string/specialization"
-        android:inputType="textPassword"
-        android:textSize="@dimen/_12ssp" />
 
     <EditText
         android:id="@+id/edt_work_start_date"
@@ -117,7 +98,8 @@
         android:ems="10"
         android:hint="@string/work_start_date"
         android:inputType="date"
-        android:textSize="@dimen/_12ssp" />
+        android:textSize="@dimen/_12ssp"
+        android:focusable="false"/>
 
     <EditText
         android:id="@+id/edt_work_end_date"
@@ -127,7 +109,8 @@
         android:ems="10"
         android:hint="@string/work_end_date"
         android:inputType="date"
-        android:textSize="@dimen/_12ssp" />
+        android:textSize="@dimen/_12ssp"
+        android:focusable="false"/>
 
     <EditText
         android:id="@+id/edt_salary"
@@ -150,17 +133,22 @@
 
 
     <Spinner
+        android:padding="15dp"
         android:id="@+id/sp_department"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"/>
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:entries="@array/departments"/>
 
 
     <Spinner
+        android:padding="15dp"
         android:id="@+id/sp_work_time"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="@dimen/_15sdp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:entries="@array/working_time"
+        android:layout_marginBottom="15dp"/>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -182,7 +170,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="mail"/>
+            android:text="male"
+            android:checked="true"/>
 
         <RadioButton
             android:id="@+id/rd_female"
@@ -202,12 +191,17 @@
         android:textColor="@color/title_text_color"
         android:textSize="@dimen/_22ssp"
         android:textStyle="bold"/>
-
+<GridLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:rowCount="2"
+    android:columnCount="3">
     <CheckBox
-        android:id="@+id/ch_saterday"
+        android:id="@+id/ch_saturday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="saterday"/>
+        android:text="saturday"
+        android:checked="true"/>
 
     <CheckBox
         android:id="@+id/ch_sunday"
@@ -235,7 +229,7 @@
         android:layout_height="wrap_content"
         android:text="Thursday"/>
 
-
+</GridLayout>
 
     <Button
         android:id="@+id/btn_save"

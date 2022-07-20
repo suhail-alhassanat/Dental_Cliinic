@@ -33,14 +33,19 @@
     <string name="work_time">Work time:</string>
     <string name="work_day">Work days:</string>
     <string name="specialization">Specialization</string>
-
     <string name="general">general</string>
     <string name="Dental_fillings_installation">Dental fillings installation</string>
     <string name="orthodontics">orthodontics</string>
     <string name="address">address</string>
+<string-array name="working_time">
+    <item>Morning 9:00-2:00 Am</item>
+    <item>Morning 3:00-8:00 pm</item>
+</string-array>
 
-    <string name="morning">Morning 9:00-2:00 Am</string>
-    <string name="eavning">Morning 3:00-8:00 pm</string>
-
-
+<string-array name="departments">
+    <item>dept1</item>
+    <item>dept2</item>
+    <item>dept3</item>
+    <item>dept4</item>
+</string-array>
 </resources>

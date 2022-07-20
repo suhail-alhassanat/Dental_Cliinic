@@ -11,15 +11,23 @@ public class Doctor {
     private String gender;
     private int identityNumber;
     private String membershipNumber;
-    private String specialization;
     private String imageUrl;
     private String department;
     private ArrayList<String> workDays;
-    private ArrayList<String> workHours;
-    private Date hiringDate;
-    private Date endDate;
+    private String workHours;
+    private String hiringDate;
+    private String endDate;
+    boolean isFirstTime;
 
-    public Doctor(String name, String email, String phone, String address, String gender, int identityNumber, String membershipNumber, String specialization, String imageUrl, String department, ArrayList<String> workDays, ArrayList<String> workHours, Date hiringDate, Date endDate) {
+    public boolean isFirstTime() {
+        return isFirstTime;
+    }
+
+    public void setFirstTime(boolean firstTime) {
+        isFirstTime = firstTime;
+    }
+
+    public Doctor(String name, String email, String phone, String address, String gender, int identityNumber, String membershipNumber, String specialization, String imageUrl, String department, ArrayList<String> workDays, String workHours, String hiringDate, String endDate) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -27,7 +35,6 @@ public class Doctor {
         this.gender = gender;
         this.identityNumber = identityNumber;
         this.membershipNumber = membershipNumber;
-        this.specialization = specialization;
         this.imageUrl = imageUrl;
         this.department = department;
         this.workDays = workDays;
@@ -36,7 +43,7 @@ public class Doctor {
         this.endDate = endDate;
     }
 
-    public Doctor(String name, String email, String phone, String address, String gender, int identityNumber, String membershipNumber, String specialization, String department, ArrayList<String> workDays, ArrayList<String> workHours, Date hiringDate, Date endDate) {
+    public Doctor(String name, String email, String phone, String address, String gender, int identityNumber, String membershipNumber, String specialization, String department, ArrayList<String> workDays, String workHours, String hiringDate, String endDate) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -44,7 +51,6 @@ public class Doctor {
         this.gender = gender;
         this.identityNumber = identityNumber;
         this.membershipNumber = membershipNumber;
-        this.specialization = specialization;
         this.department = department;
         this.workDays = workDays;
         this.workHours = workHours;
@@ -108,12 +114,7 @@ public class Doctor {
         this.membershipNumber = membershipNumber;
     }
 
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+    public Doctor() {
     }
 
     public String getImageUrl() {
@@ -140,27 +141,27 @@ public class Doctor {
         this.workDays = workDays;
     }
 
-    public ArrayList<String> getWorkHours() {
+    public String getWorkHours() {
         return workHours;
     }
 
-    public void setWorkHours(ArrayList<String> workHours) {
+    public void setWorkHours(String workHours) {
         this.workHours = workHours;
     }
 
-    public Date getHiringDate() {
+    public String getHiringDate() {
         return hiringDate;
     }
 
-    public void setHiringDate(Date hiringDate) {
+    public void setHiringDate(String hiringDate) {
         this.hiringDate = hiringDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 }
