@@ -65,33 +65,15 @@ FirebaseFirestore firestore;
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
+                    ArrayList<Doctor> doctors=new ArrayList<>();
                     ArrayList<HashMap<Object,Object>> maps=new ArrayList<>();
                     for(QueryDocumentSnapshot document:task.getResult()){
-                        maps.add(new HashMap<>(document.getData()));
-                    }
-                    ArrayList<Doctor> doctors=new ArrayList<>();
-                    for(HashMap<Object,Object> map:maps){
-                        Doctor doctor=new Doctor();
-                        doctor.setName(map.get("name").toString());
-                        doctor.setEmail(map.get("email").toString());
-                        doctor.setPhone(map.get("phone").toString());
-                        doctor.setAddress(map.get("address").toString());
-                        doctor.setIdentityNumber(Integer.parseInt(map.get("identityNumber").toString()));
-                        doctor.setMembershipNumber(map.get("membershipNumber").toString());
-                        doctor.setDepartment(map.get("department").toString());
-                        doctor.setGender(map.get("gender").toString());
-                        doctor.setWorkDays((ArrayList<String>) map.get("workDays"));
-                        doctor.setWorkHours(map.get("workHours").toString());
-                        doctor.setHiringDate(map.get("workStartDate").toString());
-                        doctor.setEndDate(map.get("workEndDate").toString());
-                        doctor.setImageUrl(map.get("imageUrl").toString());
-
+                        Doctor doctor=document.toObject(Doctor.class);
                         doctors.add(doctor);
-
+                    }
                         DoctorsRVAdapter adapter=new DoctorsRVAdapter(doctors);
                         binding.rvDoctors.setAdapter(adapter);
                         binding.rvDoctors.setLayoutManager(new LinearLayoutManager(AdminUserManagementActivity.this, RecyclerView.HORIZONTAL,false));
-                    }
                 }
                 else
                     Toast.makeText(AdminUserManagementActivity.this, "error occurred", Toast.LENGTH_SHORT).show();

@@ -1,5 +1,6 @@
 package com.suhail.dentalcliinic.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,9 +16,9 @@ public class Doctor {
     private String department;
     private ArrayList<String> workDays;
     private String workHours;
-    private String hiringDate;
-    private String endDate;
-    boolean isFirstTime;
+    private String workStartDate;
+    private String workEndDate;
+    private boolean isFirstTime;
 
     public boolean isFirstTime() {
         return isFirstTime;
@@ -27,36 +28,6 @@ public class Doctor {
         isFirstTime = firstTime;
     }
 
-    public Doctor(String name, String email, String phone, String address, String gender, int identityNumber, String membershipNumber, String specialization, String imageUrl, String department, ArrayList<String> workDays, String workHours, String hiringDate, String endDate) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.gender = gender;
-        this.identityNumber = identityNumber;
-        this.membershipNumber = membershipNumber;
-        this.imageUrl = imageUrl;
-        this.department = department;
-        this.workDays = workDays;
-        this.workHours = workHours;
-        this.hiringDate = hiringDate;
-        this.endDate = endDate;
-    }
-
-    public Doctor(String name, String email, String phone, String address, String gender, int identityNumber, String membershipNumber, String specialization, String department, ArrayList<String> workDays, String workHours, String hiringDate, String endDate) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.gender = gender;
-        this.identityNumber = identityNumber;
-        this.membershipNumber = membershipNumber;
-        this.department = department;
-        this.workDays = workDays;
-        this.workHours = workHours;
-        this.hiringDate = hiringDate;
-        this.endDate = endDate;
-    }
 
     public String getName() {
         return name;
@@ -149,19 +120,19 @@ public class Doctor {
         this.workHours = workHours;
     }
 
-    public String getHiringDate() {
-        return hiringDate;
+    public String getWorkStartDate() {
+        return workStartDate;
     }
 
-    public void setHiringDate(String hiringDate) {
-        this.hiringDate = hiringDate;
+    public void setWorkStartDate(String workStartDate) {
+        this.workStartDate = workStartDate;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public String getWorkEndDate() {
+        return workEndDate;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setWorkEndDate(String workEndDate) {
+        this.workEndDate = workEndDate;
     }
 }
