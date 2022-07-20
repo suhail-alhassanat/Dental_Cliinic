@@ -33,6 +33,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.suhail.dentalcliinic.R;
 import com.suhail.dentalcliinic.databinding.ActivityAdminAddUsersBinding;
+import com.suhail.dentalcliinic.models.Doctor;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,8 +55,6 @@ public class AdminAddUsers extends AppCompatActivity {
     private Uri uri;
     boolean imageChanged;
 
-    //hashmap
-    HashMap<Object, Object> map ;
 
     //calendar
     Calendar myCalendar = Calendar.getInstance();
@@ -81,7 +80,7 @@ public class AdminAddUsers extends AppCompatActivity {
 
         //initialize imageChanged
         imageChanged=false;
-        map = new HashMap<>();
+
         //initialize firebase
         auth=FirebaseAuth.getInstance();
         firestore=FirebaseFirestore.getInstance();
@@ -151,6 +150,7 @@ public class AdminAddUsers extends AppCompatActivity {
 
     public void registerNewDoctor() {
         if (auth.getCurrentUser() != null) {
+            Doctor doctor=new Doctor();
             String name = binding.edtUserName.getText().toString();
             String email = binding.edtEmail.getText().toString();
             String phone = binding.edtPhoneNo.getText().toString();
@@ -175,25 +175,25 @@ public class AdminAddUsers extends AppCompatActivity {
             } else {
 
                 int identityNumber = Integer.parseInt(identityNumberStr);
-                //create hashMap to store doctor information
 
-                map.put("name", name);
-                map.put("email", email);
-                map.put("phone", phone);
-                map.put("address", address);
-                map.put("identityNumber", identityNumber);
-                map.put("membershipNumber", membershipNumber);
-                map.put("department", department);
-                map.put("gender", gender);
-                map.put("workDays", workDays);
-                map.put("workHours", workHours);
-                map.put("workStartDate", workStartDate);
-                map.put("workEndDate", workEndDate);
-                map.put("isFirstTime",true);
+                //initialize doctor object to add it to firestore
+                doctor.setName(name);
+                doctor.setEmail(email);
+                doctor.setPhone(phone);
+                doctor.setAddress(address);
+                doctor.setIdentityNumber(identityNumber);
+                doctor.setMembershipNumber(membershipNumber);
+                doctor.setDepartment(department);
+                doctor.setGender(gender);
+                doctor.setWorkHours(workHours);
+                doctor.setWorkDays(workDays);
+                doctor.setWorkStartDate(workStartDate);
+                doctor.setWorkEndDate(workEndDate);
+                doctor.setFirstTime(true);
 
                 if(imageChanged == false) {
-                    map.put("imageUrl", doctorProfileImageUrl);
-                    firestore.collection("doctors").document(email).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    doctor.setImageUrl(doctorProfileImageUrl);
+                    firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -220,11 +220,7 @@ public class AdminAddUsers extends AppCompatActivity {
                                 ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        doctorProfileImageUrl = uri.toString();
-                                        map.put("imageUrl", uri.toString());
-                                        Log.d("TAG", "onSuccess:imageUrl: "+uri.toString());
-
-                                        firestore.collection("doctors").document(email).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Doctor {
+public class Doctor implements Serializable{
     private String name;
     private String email;
     private String phone;
