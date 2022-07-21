@@ -97,7 +97,8 @@
             android:ems="10"
             android:hint="@string/work_start_date"
             android:inputType="date"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_12ssp"
+            android:focusable="false"/>
 
         <EditText
             android:id="@+id/edt_work_end_date"
@@ -107,7 +108,9 @@
             android:ems="10"
             android:hint="@string/work_end_date"
             android:inputType="date"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_12ssp"
+            android:focusable="false"
+            />
 
         <EditText
             android:id="@+id/edt_salary"
@@ -126,7 +129,8 @@
             android:ems="10"
             android:hint="@string/address"
             android:inputType="text"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_12ssp"
+            />
 
         <Spinner
             android:id="@+id/sp_work_time"

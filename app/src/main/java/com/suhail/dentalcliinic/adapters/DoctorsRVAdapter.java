@@ -57,6 +57,15 @@ public class DoctorsRVAdapter extends RecyclerView.Adapter<DoctorsRVAdapter.Doct
         return doctors.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     //implement View Holder inner class
     public class DoctorsViewHolder extends RecyclerView.ViewHolder{
