@@ -1,5 +1,8 @@
 package com.suhail.dentalcliinic.adapters;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import com.suhail.dentalcliinic.databinding.ReceptionistDoctorItemDesignBinding;
 import com.suhail.dentalcliinic.models.Doctor;
+import com.suhail.dentalcliinic.ui.DoctorDetailsActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DoctorsRVAdapter extends RecyclerView.Adapter<DoctorsRVAdapter.DoctorsViewHolder> {
     ReceptionistDoctorItemDesignBinding binding;
-    ArrayList<Doctor> doctors;
+    List<Doctor> doctors;
+    Context context;
+    public static final String DOCTOR_DETAILS_KAY="doctor_details";
 
-    public DoctorsRVAdapter(ArrayList<Doctor> doctors) {
+    public DoctorsRVAdapter(List<Doctor> doctors,Context context) {
         this.doctors = doctors;
+        this.context=context;
     }
 
     @NonNull
@@ -28,9 +36,19 @@ public class DoctorsRVAdapter extends RecyclerView.Adapter<DoctorsRVAdapter.Doct
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DoctorsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DoctorsViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Picasso.get().load(doctors.get(position).getImageUrl()).into(binding.imgRecDocPhotoItem);
         binding.txtRecDocNameItem.setText(doctors.get(position).getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent doctorDetailsIntent=new Intent(context, DoctorDetailsActivity.class);
+                doctorDetailsIntent.putExtra(DOCTOR_DETAILS_KAY,doctors.get(position));
+                doctorDetailsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(doctorDetailsIntent);
+            }
+        });
+
     }
 
 

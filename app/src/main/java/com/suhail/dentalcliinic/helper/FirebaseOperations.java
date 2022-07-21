@@ -89,5 +89,4 @@ public class FirebaseOperations {
         Log.d(TAG, "addToCategoryTable: result: "+addToCategoryResult);
         return addToCategoryResult;
     }
-
 }

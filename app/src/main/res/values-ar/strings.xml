@@ -32,5 +32,11 @@
     <string name="salary">الراتب الشهري :</string>
     <string name="work_time">وقت الدوام:</string>
     <string name="work_day">أيام الدوام:</string>
+    <string name="gender">Gender:</string>
+    <string name="work_hour">Work Hour</string>
+    <string name="you_can_manage_all_the_medical_supplies_you_need">You can manage all the medical supplies you need</string>
+    <string name="laboratory">Laboratories</string>
+    <string name="address">Address</string>
+    <string name="identifier">Identifier</string>
 
 </resources>

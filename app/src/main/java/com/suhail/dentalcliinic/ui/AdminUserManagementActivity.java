@@ -6,13 +6,16 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.suhail.dentalcliinic.R;
@@ -60,24 +63,43 @@ FirebaseFirestore firestore;
         initDoctorsRV();
     }
 
+
     private void initDoctorsRV(){
-        firestore.collection("doctors").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection("doctors").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    ArrayList<Doctor> doctors=new ArrayList<>();
-                    ArrayList<HashMap<Object,Object>> maps=new ArrayList<>();
-                    for(QueryDocumentSnapshot document:task.getResult()){
-                        Doctor doctor=document.toObject(Doctor.class);
-                        doctors.add(doctor);
-                    }
-                        DoctorsRVAdapter adapter=new DoctorsRVAdapter(doctors);
-                        binding.rvDoctors.setAdapter(adapter);
-                        binding.rvDoctors.setLayoutManager(new LinearLayoutManager(AdminUserManagementActivity.this, RecyclerView.HORIZONTAL,false));
-                }
-                else
-                    Toast.makeText(AdminUserManagementActivity.this, "error occurred", Toast.LENGTH_SHORT).show();
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                binding.rvDoctors.setAdapter(new DoctorsRVAdapter(value.toObjects(Doctor.class),getBaseContext()));
+                binding.rvDoctors.setLayoutManager(new LinearLayoutManager(AdminUserManagementActivity.this, RecyclerView.HORIZONTAL,false));
             }
         });
     }
+
+
+
+
+
+
+
+
+
+//    private void initDoctorsRV(){
+//        firestore.collection("doctors").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if(task.isSuccessful()){
+//                    ArrayList<Doctor> doctors=new ArrayList<>();
+//                    ArrayList<HashMap<Object,Object>> maps=new ArrayList<>();
+//                    for(QueryDocumentSnapshot document:task.getResult()){
+//                        Doctor doctor=document.toObject(Doctor.class);
+//                        doctors.add(doctor);
+//                    }
+//                        DoctorsRVAdapter adapter=new DoctorsRVAdapter(doctors,AdminUserManagementActivity.this);
+//                        binding.rvDoctors.setAdapter(adapter);
+//                        binding.rvDoctors.setLayoutManager(new LinearLayoutManager(AdminUserManagementActivity.this, RecyclerView.HORIZONTAL,false));
+//                }
+//                else
+//                    Toast.makeText(AdminUserManagementActivity.this, "error occurred", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 }

@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_15sdp"
             android:ems="10"
-            android:hint="Identifier"
+            android:hint="@string/identifier"
             android:inputType="number"
             android:textSize="@dimen/_12ssp" />
 
