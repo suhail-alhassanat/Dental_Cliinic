@@ -38,5 +38,7 @@ public class SplashActivity extends AppCompatActivity {
         }, secondsDelayed );
 
 
+
+
     }
 }

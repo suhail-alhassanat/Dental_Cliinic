@@ -4,16 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Doctor implements Serializable{
+public class Reception implements Serializable {
     private String name;
     private String email;
     private String phone;
     private String address;
     private String gender;
     private int identityNumber;
-    private String membershipNumber;
     private String imageUrl;
-    private String department;
     private ArrayList<String> workDays;
     private String workHours;
     private String workStartDate;
@@ -36,7 +34,6 @@ public class Doctor implements Serializable{
     public void setFirstTime(boolean firstTime) {
         isFirstTime = firstTime;
     }
-
 
     public String getName() {
         return name;
@@ -86,31 +83,12 @@ public class Doctor implements Serializable{
         this.identityNumber = identityNumber;
     }
 
-    public String getMembershipNumber() {
-        return membershipNumber;
-    }
-
-    public void setMembershipNumber(String membershipNumber) {
-        this.membershipNumber = membershipNumber;
-    }
-
-    public Doctor() {
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
     }
 
     public ArrayList<String> getWorkDays() {
