@@ -28,6 +28,7 @@ FirebaseAuth auth;
         //check if user already logged in
         if(auth.getCurrentUser() != null){
             startActivity(new Intent(loginActivity.this,AdminControlActivity.class));
+            this.finish();
         }
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

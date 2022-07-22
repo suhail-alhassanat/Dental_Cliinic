@@ -1,7 +1,6 @@
 package com.suhail.dentalcliinic.helper;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -10,10 +9,11 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.suhail.dentalcliinic.models.Doctor;
-import com.suhail.dentalcliinic.models.Reception;
+import com.suhail.dentalcliinic.models.Receptor;
 import com.suhail.dentalcliinic.models.userCategory;
 
 public class FirebaseOperations {
@@ -56,12 +56,12 @@ public class FirebaseOperations {
         }
 
         //Receptor add operation
-        else if(user instanceof Reception){
-            firestore.collection("receptors").document(((Reception)user).getEmail()).set((Reception)user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        else if(user instanceof Receptor){
+            firestore.collection("receptors").document(((Receptor)user).getEmail()).set((Receptor)user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        if(addToCategoryTable(((Reception) user).getEmail(),3))
+                        if(addToCategoryTable(((Receptor) user).getEmail(),3))
                             addResult=true;
                         else
                             addResult=false;
@@ -88,5 +88,38 @@ public class FirebaseOperations {
         });
         Log.d(TAG, "addToCategoryTable: result: "+addToCategoryResult);
         return addToCategoryResult;
+    }
+    private int userExist=0;
+    public int isUserExist(Object user){
+        if(user instanceof Doctor){
+            firestore.collection("doctors")
+                    .document(((Doctor) user).getEmail())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()){
+                        userExist = 1;
+                }
+                }
+            });
+        }
+
+
+        else if(user instanceof Receptor){
+            firestore.collection("receptors")
+                    .document(((Receptor) user).getEmail())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                    userExist = 1;
+                            }
+                        }
+                    });
+
+        }
+        return userExist;
     }
 }
