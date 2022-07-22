@@ -3,6 +3,7 @@ package com.suhail.dentalcliinic.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,9 @@ import com.suhail.dentalcliinic.models.Doctor;
 
 public class DoctorDetailsActivity extends AppCompatActivity {
 ActivityDoctorDetailsBinding binding;
+
+//constants variable
+public static final String UPDATE_DOCTOR_KEY="updateDoctor";
 //declare firestore
 FirebaseFirestore firestore;
 boolean isDeleted=false;
@@ -29,10 +33,22 @@ boolean isDeleted=false;
         binding=ActivityDoctorDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //initialize  firestore
+
+//sent data and go to update activity
+        binding.imgEditIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent updateDoctorIntent =new Intent(DoctorDetailsActivity.this,UpdateDoctorActivity.class);
+                updateDoctorIntent.putExtra(UPDATE_DOCTOR_KEY,getIntent().getSerializableExtra(DoctorsRVAdapter.DOCTOR_DETAILS_KAY));
+                startActivity(updateDoctorIntent);
+            }
+        });
+
+
+//initialize  firestore
         firestore=FirebaseFirestore.getInstance();
 
-//load  the doctor data put them in all fields
+//load  the doctor data and put them in all fields
         Doctor  doctorData = (Doctor) getIntent().getSerializableExtra(DoctorsRVAdapter.DOCTOR_DETAILS_KAY);
         if (doctorData != null) {
             if (!doctorData.getImageUrl().isEmpty()) {
@@ -79,22 +95,21 @@ boolean isDeleted=false;
             if (!doctorData.getEmail().isEmpty()) {
                 binding.txtEmail.setText(doctorData.getEmail());
             }
-
+            if (!String.valueOf(doctorData.getSalary()).isEmpty()){
+                binding.txtSalary.setText(String.valueOf(doctorData.getSalary()));
+            }
         }
 
 //delete doctors
+        binding.imgClearIcon.setOnClickListener(new View.OnClickListener() {
+          @Override
+            public void onClick(View view) {
+                  delDoctor(doctorData.getEmail());
+                   finish();
+            }
+           });
 
 
-
-
-
-binding.imgClearIcon.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-  delDoctor(doctorData.getEmail());
-  finish();
-    }
-});
     }
 
 

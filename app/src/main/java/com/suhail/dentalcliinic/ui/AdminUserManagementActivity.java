@@ -74,14 +74,6 @@ FirebaseFirestore firestore;
         });
     }
 
-
-
-
-
-
-
-
-
 //    private void initDoctorsRV(){
 //        firestore.collection("doctors").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //            @Override
