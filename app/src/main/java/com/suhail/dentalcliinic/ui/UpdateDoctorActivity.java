@@ -31,6 +31,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.suhail.dentalcliinic.R;
 import com.suhail.dentalcliinic.databinding.ActivityUpdateDoctorBinding;
+import com.suhail.dentalcliinic.helper.Constants;
 import com.suhail.dentalcliinic.helper.FirebaseOperations;
 import com.suhail.dentalcliinic.models.Doctor;
 
@@ -231,7 +232,7 @@ binding.btnSave.setOnClickListener(new View.OnClickListener() {
                doctor.setMembershipNumber(doctorData.getMembershipNumber());
                uploadImage();
 
-               firestore.collection("doctors").document(doctorData.getEmail()).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+               firestore.collection(Constants.DOCTORS_COLLECTION_NAME).document(doctorData.getEmail()).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                       if (task.isSuccessful()){

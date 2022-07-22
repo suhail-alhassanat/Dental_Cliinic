@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import com.suhail.dentalcliinic.R;
 import com.suhail.dentalcliinic.adapters.DoctorsRVAdapter;
 import com.suhail.dentalcliinic.databinding.ActivityDoctorDetailsBinding;
+import com.suhail.dentalcliinic.helper.Constants;
 import com.suhail.dentalcliinic.models.Doctor;
 
 public class DoctorDetailsActivity extends AppCompatActivity {
@@ -117,7 +118,7 @@ boolean isDeleted=false;
 //methode for delete doctors
     public void delDoctor(String docId){
 
-        firestore.collection("doctors").document(docId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+        firestore.collection(Constants.DOCTORS_COLLECTION_NAME).document(docId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){

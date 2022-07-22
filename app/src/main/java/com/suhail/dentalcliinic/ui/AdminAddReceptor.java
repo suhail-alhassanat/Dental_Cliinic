@@ -35,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.suhail.dentalcliinic.databinding.ActivityAdminAddReceptorBinding;
+import com.suhail.dentalcliinic.helper.Constants;
 import com.suhail.dentalcliinic.helper.FirebaseOperations;
 import com.suhail.dentalcliinic.models.Receptor;
 import com.suhail.dentalcliinic.models.userCategory;
@@ -146,7 +147,7 @@ ActivityAdminAddReceptorBinding binding;
                 registerNewRecptor();
                 //isUserExist("adam");
 
-                firestore.collection("receptors").document("adam@rec.com")
+                firestore.collection(Constants.RECEPTORS_COLLECTION_NAME).document("adam@rec.com")
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -212,7 +213,7 @@ ActivityAdminAddReceptorBinding binding;
             } else {
 
                 //check if user is already exist
-                firestore.collection("receptors").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                firestore.collection(Constants.RECEPTORS_COLLECTION_NAME).document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
@@ -241,7 +242,7 @@ ActivityAdminAddReceptorBinding binding;
 
                                 if(imageChanged == false) {
                                     user.setImageUrl(receptionProfileImageUrl);
-                                    firestore.collection("receptors").document(email).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    firestore.collection(Constants.RECEPTORS_COLLECTION_NAME).document(email).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
@@ -272,7 +273,7 @@ ActivityAdminAddReceptorBinding binding;
                                                         @Override
                                                         public void onSuccess(Uri uri) {
                                                             user.setImageUrl(uri.toString());
-                                                            firestore.collection("receptors").document(email).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            firestore.collection(Constants.RECEPTORS_COLLECTION_NAME).document(email).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
@@ -321,7 +322,7 @@ ActivityAdminAddReceptorBinding binding;
     }}
 
     private void addToCategoryTable(String email, int type) {
-        firestore.collection("userCategories").document(email).set(new userCategory(email,type)).addOnCompleteListener(new OnCompleteListener<Void>() {
+        firestore.collection(Constants.CATEGORIES_COLLECTION_NAME).document(email).set(new userCategory(email,type)).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(AdminAddReceptor.this, "successfully added to category", Toast.LENGTH_SHORT).show();
@@ -372,7 +373,7 @@ ActivityAdminAddReceptorBinding binding;
     }
 
 private boolean isUserExist(String email){
-         firestore.collection("receptors")
+         firestore.collection(Constants.RECEPTORS_COLLECTION_NAME)
                  .document("adam@rec.com")
                  .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                      @Override
