@@ -39,8 +39,24 @@ ActivityAdminControlBinding binding;
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        // Toast message on menu item clicked
-                        Toast.makeText(AdminControlActivity.this, "You Clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        //check what item user clicked
+                        switch (item.getItemId()){
+                            case R.id.menu_laboratories:
+                                startActivity(new Intent(AdminControlActivity.this,ManageLaboratoriesActivity.class));
+                                break;
+                            case R.id.menu_pharma:
+                                Toast.makeText(AdminControlActivity.this, "you cliked: "+item.getTitle(), Toast.LENGTH_SHORT).show();
+//                                startActivity(new Intent(AdminControlActivity.this,ManageLaboratoriesActivity.class));
+                                break;
+                            case R.id.menu_process:
+                                Toast.makeText(AdminControlActivity.this, "you cliked: "+item.getTitle(), Toast.LENGTH_SHORT).show();
+//                                startActivity(new Intent(AdminControlActivity.this,ManageLaboratoriesActivity.class));
+                                break;
+                            case R.id.menu_sup_process:
+                                Toast.makeText(AdminControlActivity.this, "you cliked: "+item.getTitle(), Toast.LENGTH_SHORT).show();
+//                                startActivity(new Intent(AdminControlActivity.this,ManageLaboratoriesActivity.class));
+                                break;
+                        }
                         return true;
                     }
                 });

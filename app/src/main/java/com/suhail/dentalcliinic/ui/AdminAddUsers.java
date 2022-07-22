@@ -201,98 +201,101 @@ public class AdminAddUsers extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                    if(task.isSuccessful()){
+                       if(task.getResult().exists()){
                        p.dismiss();
                        Toast.makeText(AdminAddUsers.this, "this user is already exist", Toast.LENGTH_SHORT).show();
                    }
-                   else
-                   {
+                       else
+                       {
 
-                       int identityNumber = Integer.parseInt(identityNumberStr);
+                           int identityNumber = Integer.parseInt(identityNumberStr);
 
-                       //initialize doctor object to add it to firestore
-                       doctor.setName(name);
-                       doctor.setEmail(email);
-                       doctor.setPhone(phone);
-                       doctor.setAddress(address);
-                       doctor.setIdentityNumber(identityNumber);
-                       doctor.setMembershipNumber(membershipNumber);
-                       doctor.setDepartment(department);
-                       doctor.setSalary(Float.parseFloat(salary));
-                       doctor.setGender(gender);
-                       doctor.setWorkHours(workHours);
-                       doctor.setWorkDays(workDays);
-                       doctor.setWorkStartDate(workStartDate);
-                       doctor.setWorkEndDate(workEndDate);
-                       doctor.setFirstTime(true);
+                           //initialize doctor object to add it to firestore
+                           doctor.setName(name);
+                           doctor.setEmail(email);
+                           doctor.setPhone(phone);
+                           doctor.setAddress(address);
+                           doctor.setIdentityNumber(identityNumber);
+                           doctor.setMembershipNumber(membershipNumber);
+                           doctor.setDepartment(department);
+                           doctor.setSalary(Float.parseFloat(salary));
+                           doctor.setGender(gender);
+                           doctor.setWorkHours(workHours);
+                           doctor.setWorkDays(workDays);
+                           doctor.setWorkStartDate(workStartDate);
+                           doctor.setWorkEndDate(workEndDate);
+                           doctor.setFirstTime(true);
 
-                       if(imageChanged == false) {
-                           doctor.setImageUrl(doctorProfileImageUrl);
-                           firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
-                               @Override
-                               public void onComplete(@NonNull Task<Void> task) {
-                                   if (task.isSuccessful()) {
-                                       addToCategoryTable(email,2);
-                                       Toast.makeText(AdminAddUsers.this, "Added doctor Succefully", Toast.LENGTH_SHORT).show();
-                                       clearFields();
-                                   } else
-                                       Toast.makeText(AdminAddUsers.this, "Failed to add doctor", Toast.LENGTH_SHORT).show();
-                               }
-                           });
-                       }
-                       else{
-                           //define reference for doctor profile image
-                           StorageReference ref = storage.getReference().child("doctorsProfileImages").child(email);
-
-                           //check all requirement for uploading image
-                           if(uri != null && !email.equals("")){
-
-                               //upload the image
-                               ref.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                           if(imageChanged == false) {
+                               doctor.setImageUrl(doctorProfileImageUrl);
+                               firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
                                    @Override
-                                   public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                       if(task.isSuccessful()){
-                                           Toast.makeText(AdminAddUsers.this, "uploaded file successfully", Toast.LENGTH_SHORT).show();
-                                           ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                               @Override
-                                               public void onSuccess(Uri uri) {
-                                                   doctor.setImageUrl(uri.toString());
-                                                   firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                       @Override
-                                                       public void onComplete(@NonNull Task<Void> task) {
-                                                           if (task.isSuccessful()) {
-                                                               addToCategoryTable(email,2);
-                                                               Toast.makeText(AdminAddUsers.this, "Added doctor Succefully", Toast.LENGTH_SHORT).show();
-                                                               p.dismiss();
-//                                                               clearFields();
-                                                           } else{
-                                                               p.dismiss();
-                                                               Toast.makeText(AdminAddUsers.this, "Failed to add doctor", Toast.LENGTH_SHORT).show();
-                                                       }}
-                                                   });
-                                               }
-                                           });
-
-                                       }
-                                       else
-                                       {
-                                           Toast.makeText(AdminAddUsers.this, "failed to upload image", Toast.LENGTH_SHORT).show();
-                                           p.dismiss();
-                                       }
-                                   }
-                               }).addOnFailureListener(new OnFailureListener() {
-                                   @Override
-                                   public void onFailure(@NonNull Exception e) {
-                                       p.dismiss();
-                                       Toast.makeText(AdminAddUsers.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                   public void onComplete(@NonNull Task<Void> task) {
+                                       if (task.isSuccessful()) {
+                                           addToCategoryTable(email,2);
+                                           Toast.makeText(AdminAddUsers.this, "Added doctor Succefully", Toast.LENGTH_SHORT).show();
+                                           clearFields();
+                                       } else
+                                           Toast.makeText(AdminAddUsers.this, "Failed to add doctor", Toast.LENGTH_SHORT).show();
                                    }
                                });
+                           }
+                           else{
+                               //define reference for doctor profile image
+                               StorageReference ref = storage.getReference().child("doctorsProfileImages").child(email);
+
+                               //check all requirement for uploading image
+                               if(uri != null && !email.equals("")){
+
+                                   //upload the image
+                                   ref.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                       @Override
+                                       public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                           if(task.isSuccessful()){
+                                               Toast.makeText(AdminAddUsers.this, "uploaded file successfully", Toast.LENGTH_SHORT).show();
+                                               ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                   @Override
+                                                   public void onSuccess(Uri uri) {
+                                                       doctor.setImageUrl(uri.toString());
+                                                       firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                           @Override
+                                                           public void onComplete(@NonNull Task<Void> task) {
+                                                               if (task.isSuccessful()) {
+                                                                   addToCategoryTable(email,2);
+                                                                   Toast.makeText(AdminAddUsers.this, "Added doctor Succefully", Toast.LENGTH_SHORT).show();
+                                                                   p.dismiss();
+//                                                               clearFields();
+                                                               } else{
+                                                                   p.dismiss();
+                                                                   Toast.makeText(AdminAddUsers.this, "Failed to add doctor", Toast.LENGTH_SHORT).show();
+                                                               }}
+                                                       });
+                                                   }
+                                               });
+
+                                           }
+                                           else
+                                           {
+                                               Toast.makeText(AdminAddUsers.this, "failed to upload image", Toast.LENGTH_SHORT).show();
+                                               p.dismiss();
+                                           }
+                                       }
+                                   }).addOnFailureListener(new OnFailureListener() {
+                                       @Override
+                                       public void onFailure(@NonNull Exception e) {
+                                           p.dismiss();
+                                           Toast.makeText(AdminAddUsers.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                       }
+                                   });
+
+
+                               }
 
 
                            }
-
-
                        }
-                    }
+                   }
+
                 }});
 
         }}
