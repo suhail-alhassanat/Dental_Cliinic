@@ -18,6 +18,7 @@ import com.suhail.dentalcliinic.databinding.ActivityLoginBinding;
 public class loginActivity extends AppCompatActivity {
 ActivityLoginBinding binding;
 FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

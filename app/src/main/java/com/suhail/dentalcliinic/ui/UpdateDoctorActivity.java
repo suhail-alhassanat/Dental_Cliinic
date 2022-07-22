@@ -31,6 +31,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.suhail.dentalcliinic.R;
 import com.suhail.dentalcliinic.databinding.ActivityUpdateDoctorBinding;
+import com.suhail.dentalcliinic.helper.Constants;
 import com.suhail.dentalcliinic.helper.FirebaseOperations;
 import com.suhail.dentalcliinic.models.Doctor;
 
@@ -122,7 +123,7 @@ ActivityUpdateDoctorBinding binding;
             }
         });
 
-
+//initialize updateDoctor
 binding.btnSave.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -229,63 +230,80 @@ binding.btnSave.setOnClickListener(new View.OnClickListener() {
                doctor.setGender(doctorData.getGender());
                doctor.setIdentityNumber(doctorData.getIdentityNumber());
                doctor.setMembershipNumber(doctorData.getMembershipNumber());
-               uploadImage();
 
-               firestore.collection("doctors").document(doctorData.getEmail()).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
-                   @Override
-                   public void onComplete(@NonNull Task<Void> task) {
-                      if (task.isSuccessful()){
-                          Toast.makeText(UpdateDoctorActivity.this, "doctor update successfully", Toast.LENGTH_SHORT).show();
-                      }else{
-                          Toast.makeText(UpdateDoctorActivity.this, " doctor update failed", Toast.LENGTH_SHORT).show();
-                      }
-                   }
-               }).addOnFailureListener(new OnFailureListener() {
-                   @Override
-                   public void onFailure(@NonNull Exception e) {
-                       Toast.makeText(UpdateDoctorActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                   }
-               });
+
+               if ( uri !=null){
+                   StorageReference reference=storage.getReference().child("doctorsProfileImages").child(doctorData.getEmail());
+                   reference.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                       @Override
+                       public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                           if (task.isSuccessful()){
+                               Toast.makeText(UpdateDoctorActivity.this, "upload image successfully", Toast.LENGTH_SHORT).show();
+                               reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                   @Override
+                                   public void onSuccess(Uri uri) {
+                                       doctor.setImageUrl(uri.toString());
+                                       Log.d(TAG, "onSuccess: "+uri);
+                                       Toast.makeText(UpdateDoctorActivity.this, "success", Toast.LENGTH_SHORT).show();
+
+                                       firestore.collection(Constants.DOCTORS_COLLECTION_NAME).document(doctorData.getEmail()).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                           @Override
+                                           public void onComplete(@NonNull Task<Void> task) {
+                                               if (task.isSuccessful()){
+                                                   Toast.makeText(UpdateDoctorActivity.this, "doctor update successfully", Toast.LENGTH_SHORT).show();
+                                               }else{
+                                                   Toast.makeText(UpdateDoctorActivity.this, " doctor update failed", Toast.LENGTH_SHORT).show();
+                                               }
+                                           }
+                                       }).addOnFailureListener(new OnFailureListener() {
+                                           @Override
+                                           public void onFailure(@NonNull Exception e) {
+                                               Toast.makeText(UpdateDoctorActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                           }
+                                       });
+
+
+                                   }
+                               });
+                           }else {
+                               Toast.makeText(UpdateDoctorActivity.this, "upload image failed", Toast.LENGTH_SHORT).show();
+                           }
+                       }
+                   }).addOnFailureListener(new OnFailureListener() {
+                       @Override
+                       public void onFailure(@NonNull Exception e) {
+                           Toast.makeText(UpdateDoctorActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                       }
+                   });
+
+               }else{
+                   doctor.setImageUrl(doctorData.getImageUrl());
+
+                   firestore.collection(Constants.DOCTORS_COLLECTION_NAME).document(doctorData.getEmail()).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                       @Override
+                       public void onComplete(@NonNull Task<Void> task) {
+                           if (task.isSuccessful()){
+                               Toast.makeText(UpdateDoctorActivity.this, "doctor update successfully", Toast.LENGTH_SHORT).show();
+                           }else{
+                               Toast.makeText(UpdateDoctorActivity.this, " doctor update failed", Toast.LENGTH_SHORT).show();
+                           }
+                       }
+                   }).addOnFailureListener(new OnFailureListener() {
+                       @Override
+                       public void onFailure(@NonNull Exception e) {
+                           Toast.makeText(UpdateDoctorActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                       }
+                   });
+               }
 
            }
-
-
-
        }
     }
 
 
 //method for upload image and store it into storage cloud
     private void uploadImage(){
-        if ( uri !=null){
-            StorageReference reference=storage.getReference().child("doctorsProfileImages").child(doctorData.getEmail());
-            reference.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    if (task.isSuccessful()){
-                        Toast.makeText(UpdateDoctorActivity.this, "upload file successfully", Toast.LENGTH_SHORT).show();
-                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                doctor.setImageUrl(uri.toString());
-                                Log.d(TAG, "onSuccess: "+uri);
-                                Toast.makeText(UpdateDoctorActivity.this, "success", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }else {
-                        Toast.makeText(UpdateDoctorActivity.this, "upload file failed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(UpdateDoctorActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
 
-        }else{
-            doctor.setImageUrl(doctorData.getImageUrl());
-        }
 
     }
     //method to check which days doctor work and return it as an arraylist

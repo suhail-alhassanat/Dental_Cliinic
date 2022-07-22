@@ -28,4 +28,5 @@ public class userCategory {
     public void setType(int type) {
         this.type = type;
     }
+
 }

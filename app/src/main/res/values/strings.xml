@@ -39,6 +39,9 @@
     <string name="address">Address</string>
     <string name="identifier">Identifier</string>
     <string name="update_doctor_data">Update doctor data</string>
+    <string name="price">Price</string>
+    <string name="sub_process_name">Sub process name</string>
+    <string name="new_sub_process">New Sub Process</string>
     <string-array name="working_time">
         <item>Morning 9:00-2:00 Am</item>
         <item>Morning 3:00-8:00 pm</item>
@@ -49,5 +52,12 @@
         <item>dept2</item>
         <item>dept3</item>
         <item>dept4</item>
+    </string-array>
+
+    <string-array name="processes_section">
+        <item>dental implant</item>
+        <item>general dental</item>
+        <item>orthodontics</item>
+
     </string-array>
 </resources>

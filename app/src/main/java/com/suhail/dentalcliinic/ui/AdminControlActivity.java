@@ -49,12 +49,10 @@ ActivityAdminControlBinding binding;
 //                                startActivity(new Intent(AdminControlActivity.this,ManageLaboratoriesActivity.class));
                                 break;
                             case R.id.menu_process:
-                                Toast.makeText(AdminControlActivity.this, "you cliked: "+item.getTitle(), Toast.LENGTH_SHORT).show();
-//                                startActivity(new Intent(AdminControlActivity.this,ManageLaboratoriesActivity.class));
+                                startActivity(new Intent(AdminControlActivity.this,ManagePrecessesActivity.class));
                                 break;
                             case R.id.menu_sup_process:
-                                Toast.makeText(AdminControlActivity.this, "you cliked: "+item.getTitle(), Toast.LENGTH_SHORT).show();
-//                                startActivity(new Intent(AdminControlActivity.this,ManageLaboratoriesActivity.class));
+                                startActivity(new Intent(AdminControlActivity.this,ManageSubProcessesActivity.class));
                                 break;
                         }
                         return true;
@@ -63,9 +61,6 @@ ActivityAdminControlBinding binding;
 
                 // Showing the popup menu
                 popupMenu.show();
-
-
-
             }
         });
 

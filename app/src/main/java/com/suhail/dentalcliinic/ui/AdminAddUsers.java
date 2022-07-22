@@ -35,6 +35,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.suhail.dentalcliinic.R;
 import com.suhail.dentalcliinic.databinding.ActivityAdminAddUsersBinding;
+import com.suhail.dentalcliinic.helper.Constants;
 import com.suhail.dentalcliinic.helper.FirebaseOperations;
 import com.suhail.dentalcliinic.models.Doctor;
 import com.suhail.dentalcliinic.models.userCategory;
@@ -168,6 +169,7 @@ public class AdminAddUsers extends AppCompatActivity {
         ///
         p.setTitle("Registe New Recptor");
         p.setMessage("Loading");
+        p.setCanceledOnTouchOutside(false);
         p.show();
         //
         if (auth.getCurrentUser() != null) {
@@ -197,7 +199,7 @@ public class AdminAddUsers extends AppCompatActivity {
                 p.dismiss();
             } else {
 
-                firestore.collection("doctors").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                firestore.collection(Constants.DOCTORS_COLLECTION_NAME).document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                    if(task.isSuccessful()){
@@ -228,7 +230,7 @@ public class AdminAddUsers extends AppCompatActivity {
 
                            if(imageChanged == false) {
                                doctor.setImageUrl(doctorProfileImageUrl);
-                               firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                               firestore.collection(Constants.DOCTORS_COLLECTION_NAME).document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
                                    @Override
                                    public void onComplete(@NonNull Task<Void> task) {
                                        if (task.isSuccessful()) {
@@ -257,12 +259,12 @@ public class AdminAddUsers extends AppCompatActivity {
                                                    @Override
                                                    public void onSuccess(Uri uri) {
                                                        doctor.setImageUrl(uri.toString());
-                                                       firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                       firestore.collection(Constants.DOCTORS_COLLECTION_NAME).document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                            @Override
                                                            public void onComplete(@NonNull Task<Void> task) {
                                                                if (task.isSuccessful()) {
                                                                    addToCategoryTable(email,2);
-                                                                   Toast.makeText(AdminAddUsers.this, "Added doctor Succefully", Toast.LENGTH_SHORT).show();
+                                                                   Toast.makeText(AdminAddUsers.this, "Added doctor Successfully", Toast.LENGTH_SHORT).show();
                                                                    p.dismiss();
 //                                                               clearFields();
                                                                } else{
@@ -306,7 +308,7 @@ public class AdminAddUsers extends AppCompatActivity {
 
 
     private void addToCategoryTable(String email, int type) {
-        firestore.collection("userCategories").document(email).set(new userCategory(email,type)).addOnCompleteListener(new OnCompleteListener<Void>() {
+        firestore.collection(Constants.CATEGORIES_COLLECTION_NAME).document(email).set(new userCategory(email,type)).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(AdminAddUsers.this, "successfully added to category", Toast.LENGTH_SHORT).show();

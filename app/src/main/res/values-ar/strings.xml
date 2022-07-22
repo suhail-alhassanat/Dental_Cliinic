@@ -39,5 +39,8 @@
     <string name="address">Address</string>
     <string name="identifier">Identifier</string>
     <string name="update_doctor_data">Update doctor data</string>
+    <string name="price">Price:</string>
+    <string name="sub_process_name">Sub process name</string>
+    <string name="new_sub_process">New Sub Process</string>
 
 </resources>
