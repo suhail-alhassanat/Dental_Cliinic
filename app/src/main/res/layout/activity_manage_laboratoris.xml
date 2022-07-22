@@ -44,9 +44,8 @@
         android:id="@+id/rv_laboratories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView5"
         android:layout_above="@id/fb_add_laboratories"
-        />
+        android:layout_below="@id/textView5" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fb_add_laboratories"

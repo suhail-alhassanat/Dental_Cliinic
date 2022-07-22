@@ -122,7 +122,7 @@
                             android:textStyle="bold" />
 
                         <ImageView
-                            android:id="@+id/img_add_receptionist"
+                            android:id="@+id/img_add_receptor"
                             android:layout_width="@dimen/_25sdp"
                             android:layout_height="@dimen/_25sdp"
                             android:layout_alignParentTop="true"
@@ -132,14 +132,13 @@
                             app:srcCompat="@drawable/add_icon" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_receptionist"
+                            android:id="@+id/rv_receptors"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/textView3"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_15sdp"
-                            android:layout_marginBottom="@dimen/_15sdp"
-                            />
+                            android:layout_marginBottom="@dimen/_15sdp" />
                 </RelativeLayout>
 
 

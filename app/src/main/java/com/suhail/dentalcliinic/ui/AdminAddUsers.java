@@ -1,6 +1,7 @@
 package com.suhail.dentalcliinic.ui;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.hotspot2.pps.Credential;
@@ -26,6 +27,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -57,6 +59,10 @@ public class AdminAddUsers extends AppCompatActivity {
     private Uri uri;
     boolean imageChanged;
 
+    //define ProgressDialog
+    ProgressDialog p ;
+
+
     //Firebase helper
     FirebaseOperations firebaseOperations;
 
@@ -74,7 +80,6 @@ public class AdminAddUsers extends AppCompatActivity {
         }
         }
     });
-    private boolean createUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +92,9 @@ public class AdminAddUsers extends AppCompatActivity {
 
         //initialize imageChanged
         imageChanged=false;
+
+        //initialize progressDialog
+        p = new ProgressDialog(AdminAddUsers.this);
 
         //initialize firebase
         auth=FirebaseAuth.getInstance();
@@ -135,12 +143,6 @@ public class AdminAddUsers extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             registerNewDoctor();
-//                if(getUserData()!=null){
-//                    if(firebaseOperations.registerNewUser(getUserData()))
-//                    Toast.makeText(AdminAddUsers.this, "added doctor successfully", Toast.LENGTH_SHORT).show();
-//                    else
-//                        Toast.makeText(AdminAddUsers.this, "Failed to add doctor", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
 
@@ -162,6 +164,12 @@ public class AdminAddUsers extends AppCompatActivity {
 
 
     public void registerNewDoctor() {
+
+        ///
+        p.setTitle("Registe New Recptor");
+        p.setMessage("Loading");
+        p.show();
+        //
         if (auth.getCurrentUser() != null) {
             Doctor doctor=new Doctor();
             String name = binding.edtUserName.getText().toString();
@@ -186,189 +194,112 @@ public class AdminAddUsers extends AppCompatActivity {
                     || membershipNumber.equals("") || department.equals("") || salary.equals("") || gender.equals("") || workDays.size() == 0
                     || workHours.equals("") || workStartDate.equals("") || workEndDate.equals("")) {
                 Toast.makeText(this, "please fill all fields first", Toast.LENGTH_SHORT).show();
+                p.dismiss();
             } else {
 
-                int identityNumber = Integer.parseInt(identityNumberStr);
+                firestore.collection("doctors").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                   if(task.isSuccessful()){
+                       p.dismiss();
+                       Toast.makeText(AdminAddUsers.this, "this user is already exist", Toast.LENGTH_SHORT).show();
+                   }
+                   else
+                   {
 
-                //initialize doctor object to add it to firestore
-                doctor.setName(name);
-                doctor.setEmail(email);
-                doctor.setPhone(phone);
-                doctor.setAddress(address);
-                doctor.setIdentityNumber(identityNumber);
-                doctor.setMembershipNumber(membershipNumber);
-                doctor.setDepartment(department);
-                doctor.setSalary(Float.parseFloat(salary));
-                doctor.setGender(gender);
-                doctor.setWorkHours(workHours);
-                doctor.setWorkDays(workDays);
-                doctor.setWorkStartDate(workStartDate);
-                doctor.setWorkEndDate(workEndDate);
-                doctor.setFirstTime(true);
+                       int identityNumber = Integer.parseInt(identityNumberStr);
 
-                if(imageChanged == false) {
-                    doctor.setImageUrl(doctorProfileImageUrl);
-//                    firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) {
-//                                addToCategoryTable(email,2);
-//                                Toast.makeText(AdminAddUsers.this, "Added doctor Succefully", Toast.LENGTH_SHORT).show();
-//                                clearFields();
-//                            } else
-//                                Toast.makeText(AdminAddUsers.this, "Failed to add doctor", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-                    if (firebaseOperations.registerNewUser(doctor))
-                        Toast.makeText(this, "added successfully", Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(this, "Failed to add", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                //define reference for doctor profile image
-                StorageReference ref = storage.getReference().child("doctorsProfileImages").child(email);
+                       //initialize doctor object to add it to firestore
+                       doctor.setName(name);
+                       doctor.setEmail(email);
+                       doctor.setPhone(phone);
+                       doctor.setAddress(address);
+                       doctor.setIdentityNumber(identityNumber);
+                       doctor.setMembershipNumber(membershipNumber);
+                       doctor.setDepartment(department);
+                       doctor.setSalary(Float.parseFloat(salary));
+                       doctor.setGender(gender);
+                       doctor.setWorkHours(workHours);
+                       doctor.setWorkDays(workDays);
+                       doctor.setWorkStartDate(workStartDate);
+                       doctor.setWorkEndDate(workEndDate);
+                       doctor.setFirstTime(true);
 
-                //check all requirement for uploading image
-                if(uri != null && !email.equals("")){
+                       if(imageChanged == false) {
+                           doctor.setImageUrl(doctorProfileImageUrl);
+                           firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                               @Override
+                               public void onComplete(@NonNull Task<Void> task) {
+                                   if (task.isSuccessful()) {
+                                       addToCategoryTable(email,2);
+                                       Toast.makeText(AdminAddUsers.this, "Added doctor Succefully", Toast.LENGTH_SHORT).show();
+                                       clearFields();
+                                   } else
+                                       Toast.makeText(AdminAddUsers.this, "Failed to add doctor", Toast.LENGTH_SHORT).show();
+                               }
+                           });
+                       }
+                       else{
+                           //define reference for doctor profile image
+                           StorageReference ref = storage.getReference().child("doctorsProfileImages").child(email);
 
-                    //upload the image
-                    ref.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(AdminAddUsers.this, "uploaded file successfully", Toast.LENGTH_SHORT).show();
-                                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        doctor.setImageUrl(uri.toString());
-//                                        firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<Void> task) {
-//                                                if (task.isSuccessful()) {
-//                                                    Toast.makeText(AdminAddUsers.this, "Added doctor Succefully", Toast.LENGTH_SHORT).show();
-//                                                    clearFields();
-//                                                } else
-//                                                    Toast.makeText(AdminAddUsers.this, "Failed to add doctor", Toast.LENGTH_SHORT).show();
-//                                            }
-//                                        });
-                                        if (firebaseOperations.registerNewUser(doctor))
-                                            Toast.makeText(AdminAddUsers.this, "added successfully", Toast.LENGTH_SHORT).show();
-                                        else
-                                            Toast.makeText(AdminAddUsers.this, "Failed to add", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                           //check all requirement for uploading image
+                           if(uri != null && !email.equals("")){
 
-                            }
-                            else
-                            {
-                                Toast.makeText(AdminAddUsers.this, "failed to upload image", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AdminAddUsers.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                               //upload the image
+                               ref.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                   @Override
+                                   public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                       if(task.isSuccessful()){
+                                           Toast.makeText(AdminAddUsers.this, "uploaded file successfully", Toast.LENGTH_SHORT).show();
+                                           ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                               @Override
+                                               public void onSuccess(Uri uri) {
+                                                   doctor.setImageUrl(uri.toString());
+                                                   firestore.collection("doctors").document(email).set(doctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                       @Override
+                                                       public void onComplete(@NonNull Task<Void> task) {
+                                                           if (task.isSuccessful()) {
+                                                               addToCategoryTable(email,2);
+                                                               Toast.makeText(AdminAddUsers.this, "Added doctor Succefully", Toast.LENGTH_SHORT).show();
+                                                               p.dismiss();
+//                                                               clearFields();
+                                                           } else{
+                                                               p.dismiss();
+                                                               Toast.makeText(AdminAddUsers.this, "Failed to add doctor", Toast.LENGTH_SHORT).show();
+                                                       }}
+                                                   });
+                                               }
+                                           });
 
-
-                }
+                                       }
+                                       else
+                                       {
+                                           Toast.makeText(AdminAddUsers.this, "failed to upload image", Toast.LENGTH_SHORT).show();
+                                           p.dismiss();
+                                       }
+                                   }
+                               }).addOnFailureListener(new OnFailureListener() {
+                                   @Override
+                                   public void onFailure(@NonNull Exception e) {
+                                       p.dismiss();
+                                       Toast.makeText(AdminAddUsers.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                   }
+                               });
 
 
-            }
+                           }
+
+
+                       }
+                    }
+                }});
+
         }}
-        else
+        else{
+            p.dismiss();
             Toast.makeText(this, "something wrong with your account", Toast.LENGTH_SHORT).show();
-    }
-
-    //getUserData
-    public Doctor getUserData(){
-        Doctor doctor=new Doctor();
-        String name = binding.edtUserName.getText().toString();
-        String email = binding.edtEmail.getText().toString();
-        String phone = binding.edtPhoneNo.getText().toString();
-        String address = binding.edtAddress.getText().toString();
-        String identityNumberStr = binding.edtId.getText().toString();
-        String membershipNumber = binding.edtMemberNo.getText().toString();
-        String department = binding.spDepartment.getSelectedItem().toString();
-        String salary=binding.edtSalary.getText().toString();
-        String gender;
-        if (binding.rdMail.isChecked())
-            gender = "male";
-        else
-            gender = "female";
-        ArrayList<String> workDays = getWorkDays();
-        String workHours = binding.spWorkTime.getSelectedItem().toString();
-        String workStartDate = binding.edtWorkStartDate.getText().toString();
-        String workEndDate = binding.edtWorkEndDate.getText().toString();
-
-        if (name.equals("") || email.equals("") || phone.equals("") || address.equals("") || identityNumberStr.equals("")
-                || membershipNumber.equals("") || department.equals("") || salary.equals("") || gender.equals("") || workDays.size() == 0
-                || workHours.equals("") || workStartDate.equals("") || workEndDate.equals("")) {
-            Toast.makeText(this, "please fill all fields first", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-        else {
-
-            int identityNumber = Integer.parseInt(identityNumberStr);
-
-            //initialize doctor object to add it to firestore
-            doctor.setName(name);
-            doctor.setEmail(email);
-            doctor.setPhone(phone);
-            doctor.setAddress(address);
-            doctor.setIdentityNumber(identityNumber);
-            doctor.setMembershipNumber(membershipNumber);
-            doctor.setDepartment(department);
-            doctor.setSalary(Float.parseFloat(salary));
-            doctor.setGender(gender);
-            doctor.setWorkHours(workHours);
-            doctor.setWorkDays(workDays);
-            doctor.setWorkStartDate(workStartDate);
-            doctor.setWorkEndDate(workEndDate);
-            doctor.setFirstTime(true);
-
-            if (imageChanged == false)
-                doctor.setImageUrl(doctorProfileImageUrl);
-             else {
-                //define reference for doctor profile image
-                StorageReference ref = storage.getReference().child("doctorsProfileImages").child(email);
-
-                //check all requirement for uploading image
-                if (uri != null && !email.equals("")) {
-
-                    //upload the image
-                    ref.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(AdminAddUsers.this, "uploaded file successfully", Toast.LENGTH_SHORT).show();
-                                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        doctor.setImageUrl(uri.toString());
-                                        Log.d("TAG", "onSuccess: "+doctor.getImageUrl());
-                                    }
-                                });
-
-                            } else {
-                                Toast.makeText(AdminAddUsers.this, "failed to upload image", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AdminAddUsers.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-
-                }
-
-
-            }}
-        return doctor;
-    }
+    }}
 
 
     private void addToCategoryTable(String email, int type) {
