@@ -62,8 +62,7 @@
           android:text="TextView"
           android:textSize="@dimen/_20ssp"
           app:layout_constraintBottom_toBottomOf="@+id/img_doctor_photo"
-          app:layout_constraintEnd_toStartOf="@id/img_clear_icon"
-          app:layout_constraintStart_toEndOf="@id/img_doctor_photo"
+          app:layout_constraintStart_toEndOf="@+id/img_doctor_photo"
           app:layout_constraintTop_toTopOf="@+id/img_doctor_photo" />
 
 

@@ -38,5 +38,6 @@
     <string name="laboratory">Laboratories</string>
     <string name="address">Address</string>
     <string name="identifier">Identifier</string>
+    <string name="update_doctor_data">Update doctor data</string>
 
 </resources>

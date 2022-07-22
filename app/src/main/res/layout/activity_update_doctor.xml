@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -19,7 +17,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="Update doctor data"
+            android:text="@string/update_doctor_data"
             android:textColor="#1E779F"
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold" />
@@ -35,12 +33,13 @@
             app:srcCompat="@drawable/arrow_back" />
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
-            android:layout_marginTop="@dimen/_15sdp">
+            android:layout_marginTop="@dimen/_15sdp"
+            android:padding="@dimen/_5sdp">
 
             <ImageView
                 android:id="@+id/img_doctor_photo"
@@ -48,24 +47,18 @@
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/txt_doctor_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
                 android:text="TextView"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:textSize="@dimen/_20ssp"
-                app:layout_constraintBottom_toBottomOf="@+id/img_doctor_photo"
-                app:layout_constraintStart_toEndOf="@+id/img_doctor_photo"
-                app:layout_constraintTop_toTopOf="@+id/img_doctor_photo" />
+               android:layout_gravity="center_vertical" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
 
@@ -97,40 +90,13 @@
                 android:textSize="@dimen/_15ssp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_membership_no"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ll_address"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:text="@string/membership_number"
-                android:textColor="#1E779F"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edt_membership_no"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:textColor="#434141"
-                android:textSize="@dimen/_15ssp" />
-        </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/ll_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ll_membership_no"
+            android:layout_below="@id/ll_address"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/textView9"
@@ -153,50 +119,12 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/ll_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ll_phone"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:text="@string/gender"
-                android:textColor="#1E779F"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold" />
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <RadioButton
-                    android:id="@+id/rb_mail"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="male" />
-
-                <RadioButton
-                    android:id="@+id/rb_female"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="female"/>
-            </RadioGroup>
-
-
-        </LinearLayout>
-
 
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ll_gender"
+                android:layout_below="@id/ll_phone"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:text="@string/department"
@@ -240,16 +168,9 @@
             android:text="dep4"/>
     </RadioGroup>
 
-
-        <LinearLayout
-            android:id="@+id/ll_works_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rg_dep"
-            android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/textView12"
+                android:layout_below="@id/rg_dep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
@@ -259,23 +180,55 @@
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/sp_work_day"
+        <GridLayout
+            android:id="@+id/gl_work_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="2"
+            android:layout_below="@id/textView12"
+            android:columnCount="3">
+            <CheckBox
+                android:id="@+id/ch_saturday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:textColor="#434141"
-                android:textSize="@dimen/_15ssp" />
-        </LinearLayout>
+                android:text="saturday" />
+
+            <CheckBox
+                android:id="@+id/ch_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sunday"/>
+            <CheckBox
+                android:id="@+id/ch_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="monday"/>
+            <CheckBox
+                android:id="@+id/ch_Tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tuesday"/>
+            <CheckBox
+                android:id="@+id/ch_Wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wednesday"/>
+            <CheckBox
+                android:id="@+id/ch_Thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thursday"/>
+
+        </GridLayout>
 
 
         <LinearLayout
             android:id="@+id/ll_start_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ll_works_day"
+            android:layout_below="@id/gl_work_days"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
@@ -286,8 +239,9 @@
                 android:textColor="#1E779F"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/txt_start_of_work"
+
+            <EditText
+                android:id="@+id/edt_start_of_work"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -312,8 +266,8 @@
                 android:textColor="#1E779F"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/txt_end_of_work"
+            <EditText
+                android:id="@+id/edt_end_of_work"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -322,37 +276,13 @@
                 android:textSize="@dimen/_15ssp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_identity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ll_end_of_work"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:text="@string/id"
-                android:textColor="#1E779F"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/txt_identity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:textColor="#434141"
-                android:textSize="@dimen/_15ssp" />
-        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/ll_salary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ll_identity"
+            android:layout_below="@id/ll_end_of_work"
             android:orientation="horizontal">
 
             <TextView
@@ -366,13 +296,14 @@
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txt_salary"
+            <EditText
+                android:id="@+id/edt_salary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:textColor="#434141"
+                android:inputType="numberDecimal"
                 android:textSize="@dimen/_15ssp" />
         </LinearLayout>
         <LinearLayout
@@ -392,15 +323,37 @@
                 android:textColor="#1E779F"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txt_work_hour"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/rg_work_time"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:textColor="#434141"
-                android:textSize="@dimen/_15ssp" />
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rb_work_hour_morning"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Morning 9:00-2:00 Am" />
+
+                <RadioButton
+                    android:id="@+id/rb_work_hour_evening"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Morning 3:00-8:00 pm"/>
+            </RadioGroup>
+
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/ll_work_hour"
+            android:backgroundTint="@color/btn_back_color"
+            android:text="@string/save"/>
+
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
