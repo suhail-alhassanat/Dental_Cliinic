@@ -128,6 +128,8 @@ binding.btnSave.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         updateDoctor();
+        startActivity(new Intent(UpdateDoctorActivity.this,AdminUserManagementActivity.class));
+        finish();
     }
 });
 
@@ -301,11 +303,6 @@ binding.btnSave.setOnClickListener(new View.OnClickListener() {
     }
 
 
-//method for upload image and store it into storage cloud
-    private void uploadImage(){
-
-
-    }
     //method to check which days doctor work and return it as an arraylist
     private ArrayList<String> getWorkDays() {
         ArrayList<String> workDays=new ArrayList<>();

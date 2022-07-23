@@ -42,6 +42,7 @@
     <string name="price">Price</string>
     <string name="sub_process_name">Sub process name</string>
     <string name="new_sub_process">New Sub Process</string>
+    <string name="update_receptor_data">Update receptor data</string>
     <string-array name="working_time">
         <item>Morning 9:00-2:00 Am</item>
         <item>Morning 3:00-8:00 pm</item>

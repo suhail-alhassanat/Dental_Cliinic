@@ -28,6 +28,9 @@ import com.suhail.dentalcliinic.helper.Constants;
 import com.suhail.dentalcliinic.models.Process;
 import com.suhail.dentalcliinic.models.SubProcess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddSubProcessActivity extends AppCompatActivity {
 ActivityAddSubProcessBinding binding;
 
@@ -81,8 +84,14 @@ ActivityAddSubProcessBinding binding;
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value!=null&&error==null){
-                binding.spSubProcessType.setAdapter(new ProcessSPAdapter(value.toObjects(Process.class),AddSubProcessActivity.this));
-                p.dismiss();
+//                binding.spSubProcessType.setAdapter(new ProcessSPAdapter(value.toObjects(Process.class),AddSubProcessActivity.this));
+//                p.dismiss();
+                    List<Process> processList=value.toObjects(Process.class);
+                    List<String> spItems=new ArrayList<>();
+                    for(Process p: processList)
+                        spItems.add(p.getName());
+                    binding.spSubProcessType.setAdapter(new ArrayAdapter<String>(AddSubProcessActivity.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,spItems));
+                    p.dismiss();
                 }else {
                     Toast.makeText(AddSubProcessActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     p.dismiss();
@@ -97,6 +106,7 @@ ActivityAddSubProcessBinding binding;
 
     private void addSubProcess() {
          String name = binding.edtSubProcessName.getText().toString();
+         View view=binding.spSubProcessType.getSelectedView();
          String type = binding.spSubProcessType.getSelectedItem().toString();
          float price =Float.parseFloat(binding.edtSubProcessPrice.getText().toString()) ;
 

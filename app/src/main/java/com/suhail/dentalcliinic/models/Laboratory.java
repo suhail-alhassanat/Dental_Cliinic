@@ -7,6 +7,9 @@ public class Laboratory implements Serializable {
     private String address;
     private String phone;
 
+    public Laboratory() {
+    }
+
     public Laboratory(String name, String address, String phone) {
         this.name = name;
         this.address = address;

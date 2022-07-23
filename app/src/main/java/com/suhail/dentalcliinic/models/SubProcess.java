@@ -1,6 +1,8 @@
 package com.suhail.dentalcliinic.models;
 
-public class SubProcess {
+import java.io.Serializable;
+
+public class SubProcess implements Serializable {
   private String name;
   private String type;
   private float price;

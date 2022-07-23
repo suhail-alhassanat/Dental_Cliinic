@@ -42,5 +42,6 @@
     <string name="price">Price:</string>
     <string name="sub_process_name">Sub process name</string>
     <string name="new_sub_process">New Sub Process</string>
+    <string name="update_receptor_data">Update receptor data</string>
 
 </resources>

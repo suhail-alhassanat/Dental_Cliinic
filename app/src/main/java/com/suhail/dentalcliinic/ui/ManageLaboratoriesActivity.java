@@ -45,6 +45,9 @@ ActivityManageLaboratorisBinding binding;
         auth=FirebaseAuth.getInstance();
         firestore=FirebaseFirestore.getInstance();
 
+        //initialize recycler
+        initLaboratoriesRv();
+
         //implement add button code
         binding.fbAddLaboratories.setOnClickListener(new View.OnClickListener() {
             @Override

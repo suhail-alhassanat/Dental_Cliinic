@@ -42,6 +42,7 @@ boolean isDeleted=false;
                 Intent updateDoctorIntent =new Intent(DoctorDetailsActivity.this,UpdateDoctorActivity.class);
                 updateDoctorIntent.putExtra(UPDATE_DOCTOR_KEY,getIntent().getSerializableExtra(DoctorsRVAdapter.DOCTOR_DETAILS_KAY));
                 startActivity(updateDoctorIntent);
+                finish();
             }
         });
 
@@ -105,7 +106,9 @@ boolean isDeleted=false;
         binding.imgClearIcon.setOnClickListener(new View.OnClickListener() {
           @Override
             public void onClick(View view) {
+              if (doctorData!=null){
                   delDoctor(doctorData.getEmail());
+              }
                    finish();
             }
            });

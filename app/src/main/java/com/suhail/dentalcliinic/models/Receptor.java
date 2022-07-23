@@ -19,6 +19,8 @@ public class Receptor implements Serializable {
     private boolean isFirstTime;
     private float salary;
 
+
+
     public float getSalary() {
         return salary;
     }

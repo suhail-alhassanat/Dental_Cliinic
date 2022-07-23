@@ -1,6 +1,8 @@
 package com.suhail.dentalcliinic.models;
 
-public class Process {
+import java.io.Serializable;
+
+public class Process implements Serializable {
    private String name;
    private String section;
 

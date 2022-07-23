@@ -1,6 +1,7 @@
 package com.suhail.dentalcliinic.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ public class DoctorsRVAdapter extends RecyclerView.Adapter<DoctorsRVAdapter.Doct
                 doctorDetailsIntent.putExtra(DOCTOR_DETAILS_KAY,doctors.get(position));
                 doctorDetailsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(doctorDetailsIntent);
+                ((Activity)view.getContext()).finish();
             }
         });
 
